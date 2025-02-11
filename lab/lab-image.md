@@ -1,3 +1,21 @@
+
+delete all containers:
+
+```bash
+docker ps -a
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker ps -a
+```
+
+delete all images:
+
+```bash
+docker image ls
+docker image rm $(docker image ls -q)
+docker image ls
+```
+
 pull & inspect images:
 
 ```bash
@@ -14,10 +32,22 @@ docker image ls
 
 ```
 
-A tool for exploring each layer in a docker image:
-https://github.com/wagoodman/dive
+pull an image using a specific tag:
 
-tag images:
+```bash
+docker pull redis:6.0.9
+docker image ls
+```
+
+pull an image using a specific digest:
+
+```bash
+docker pull redis@sha256:
+docker image ls
+```
+
+
+tag an image:
 
 ```bash
 docker tag redis:latest redis:dev
@@ -25,38 +55,70 @@ docker image ls
 ```
 
 
-demo-1: build a spring boot app image
+A tool for exploring each layer in a docker image:
+https://github.com/wagoodman/dive
+
+
+demo-1: build a spring-boot-app image
 
 ```bash
 cd greeting-service
-
-sudo apt-get update
-sudo apt-get install openjdk-17-jdk openjdk-17-jre
-java -version
-./mvnw clean package
-ls -l target/greeting-service-0.0.1-SNAPSHOT.jar
-
 docker build -t greeting-service:latest .
 docker image ls
 docker inspect greeting-service
-
 ```
 
 demo-2: build a angular app image
     
 ```bash
-
-sudo apt install nodejs npm -y
-node -v 
-npm -v
-
-sudo npm install -g @angular/cli
-ng --version
-ng new angular-app
-
-
 cd angular-app
 docker build -t angular-app:latest .
 docker image ls
 docker run -d -p 80:80 --name angular-app angular-app:latest
 ```
+
+build an image for multi-architecture:
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t greeting-service:multiarch .
+docker image ls
+docker inspect greeting-service:multiarch
+```
+
+pull an imgae with a specific architecture:
+
+```bash
+docker pull --platform linux/arm64 redis
+docker image ls
+```
+
+
+scan images for vulnerabilities:
+
+```bash
+docker scan angular-app:latest
+docker scan greeting-service:latest
+```
+
+setup a private registry:
+
+```bash
+docker run -d -p 5000:5000 --name registry registry:2
+docker ps
+```
+
+tag an image and push it to the private registry:
+
+```bash
+docker tag greeting-service:latest localhost:5000/greeting-service:latest
+docker image ls
+docker push localhost:5000/greeting-service:latest
+```
+
+pull an image from the private registry:
+
+```bash
+docker pull localhost:5000/greeting-service:latest
+docker image ls
+```
+
