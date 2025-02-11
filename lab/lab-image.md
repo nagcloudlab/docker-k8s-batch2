@@ -24,7 +24,8 @@ docker tag redis:latest redis:dev
 docker image ls
 ```
 
-build image - spring boot app:
+
+demo-1: build a spring boot app image
 
 ```bash
 cd greeting-service
@@ -35,20 +36,20 @@ java -version
 ./mvnw clean package
 ls -l target/greeting-service-0.0.1-SNAPSHOT.jar
 
-
 docker build -t greeting-service:latest .
 docker image ls
 docker inspect greeting-service
 
 ```
 
-
+demo-2: build a angular app image
     
 ```bash
+
 sudo apt install nodejs npm -y
 node -v 
 npm -v
-install angular cli:
+
 sudo npm install -g @angular/cli
 ng --version
 ng new angular-app
@@ -56,9 +57,6 @@ ng new angular-app
 
 cd angular-app
 docker build -t angular-app:latest .
-
 docker image ls
-
 docker run -d -p 80:80 --name angular-app angular-app:latest
-
 ```
