@@ -12,7 +12,7 @@ delete all images:
 
 ```bash
 docker image ls
-docker image rm $(docker image ls -q)
+docker image rm -f $(docker image ls -q)
 docker image ls
 ```
 
@@ -58,7 +58,7 @@ docker image ls
 tag an image:
 
 ```bash
-docker tag nagabhushanamn/greeting-service:v1 nagabhushanamn/greeting-service:training
+docker tag nagabhushanamn/greeting-service:v1 nagabhushanamn/greeting-service:tng
 docker image ls
 ```
 
@@ -81,30 +81,36 @@ Demo-1: build a spring-boot-app image
 
 ```bash
 cd services/greeting-service
-docker build -t greeting-service:latest .
+docker build -t greeting-service:v2 .
 docker image ls
-docker inspect greeting-service
+docker run -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=stage  greeting-service:v2
 ```
 
-
-Demo-3: build a python-app image
+Demo-2: build a python-app image
 
 ```bash
-cd cd services/python-web-service
-docker build -t python-app:latest .
+cd services/python-web-service
+docker build --build-arg FILE_NAME=app.py -t python-web-service:v1 .
 docker image ls
-docker run -d -p 8080:8080 --name python-app python-app:latest
-curl http://localhost:8080
+docker run -d -p 8080:8080  python-web-service:latest
+curl http://localhost:8080/api/info
 ```
 
+
+```bash
+cd services/python-apps
+docker build -t python-apps:v3 .
+docker image ls
+docker run python-apps:v3 --help
+```
 
 
 build an image for multi-architecture:
 
 ```bash
-docker buildx build --platform linux/amd64,linux/arm64 -t greeting-service:multiarch .
+docker buildx build --platform linux/amd64,linux/arm64 -t greeting-service:v1 .
 docker image ls
-docker inspect greeting-service:multiarch
+docker inspect greeting-service:v1
 ```
 
 pull an imgae with a specific architecture:
@@ -118,7 +124,6 @@ docker image ls
 scan images for vulnerabilities:
 
 ```bash
-docker scan angular-app:latest
 docker scan greeting-service:latest
 ```
 
@@ -127,20 +132,21 @@ setup a private registry:
 ```bash
 docker run -d -p 5000:5000 --name registry registry:2
 docker ps
+curl http://localhost:5000/v2/_catalog
 ```
 
 tag an image and push it to the private registry:
 
 ```bash
-docker tag greeting-service:latest localhost:5000/greeting-service:latest
+docker tag greeting-service:v2 localhost:5000/greeting-service:v2
 docker image ls
-docker push localhost:5000/greeting-service:latest
+docker push localhost:5000/greeting-service:v2
 ```
 
 pull an image from the private registry:
 
 ```bash
-docker pull localhost:5000/greeting-service:latest
+docker pull localhost:5000/greeting-service:v2
 docker image ls
 ```
 
