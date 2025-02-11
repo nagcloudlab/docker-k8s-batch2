@@ -42,7 +42,15 @@ docker image ls
 pull an image using a specific digest:
 
 ```bash
-docker pull redis@sha256:
+docker pull redis@sha256:48c1431bed43fb2645314e4a22d6ca03cf36c5541d034de6a4f3330e7174915b
+docker image ls
+```
+
+
+pull un-official images:
+
+```bash
+docker pull docker.io/nagabhushanamn/greeting-service:v1
 docker image ls
 ```
 
@@ -50,13 +58,26 @@ docker image ls
 tag an image:
 
 ```bash
-docker tag redis:latest redis:dev
+docker tag nagabhushanamn/greeting-service:v1 nagabhushanamn/greeting-service:training
 docker image ls
 ```
 
 
 A tool for exploring each layer in a docker image:
 https://github.com/wagoodman/dive
+
+```bash
+DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+curl -OL https://github.com/wagoodman/dive/releases/download/v${DIVE_VERSION}/dive_${DIVE_VERSION}_linux_amd64.deb
+sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb
+```
+
+```bash
+dive nagabhushanamn/greeting-service:v1
+```
+
+
+
 
 
 demo-1: build a spring-boot-app image
