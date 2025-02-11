@@ -5,6 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+// line-1
+// line-2
+// line-3
+// line-4
+
 @SpringBootApplication
 @RestController
 public class GreetingServiceApplication {

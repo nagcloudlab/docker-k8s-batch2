@@ -12,9 +12,12 @@ ENV APP_HOME=/app \
 WORKDIR $APP_HOME
 # Copy the Maven descriptor and source code
 COPY pom.xml .
+RUN mvn dependency:go-offline
 COPY src ./src
 # Run the Maven build to create the jar (skip tests for speed)
 RUN mvn clean package -DskipTests
+
+
 
 # ===== Stage 2: Create the Runtime Image =====
 FROM openjdk:17-jdk-alpine
