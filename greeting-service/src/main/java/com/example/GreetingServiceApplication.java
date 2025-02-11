@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingServiceApplication {
 
-	@GetMapping("/api/hello")
-	public String getHello() {
-		return "Hello, welcome to container world";
+	@GetMapping("/hello")
+	public String sayHello() {
+		return "Hello, from greeting-service";
 	}
 
 	public static void main(String[] args) {

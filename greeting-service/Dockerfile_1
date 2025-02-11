@@ -1,22 +1,4 @@
-# ===== Stage 1: Build the Application =====
-FROM maven:3-amazoncorretto-17 AS build
-LABEL maintainer="your-email@example.com" \
-      version="1.0" \
-      description="Build stage for Spring Boot Greeting Service"
-# Build-time argument (can be overridden during build)
-ARG build_version=1.0
-# Environment variables used during build
-ENV APP_HOME=/app \
-    APP_VERSION=${build_version}
-# Set working directory
-WORKDIR $APP_HOME
-# Copy the Maven descriptor and source code
-COPY pom.xml .
-COPY src ./src
-# Run the Maven build to create the jar (skip tests for speed)
-RUN mvn clean package -DskipTests
 
-# ===== Stage 2: Create the Runtime Image =====
 FROM openjdk:17-jdk-alpine
 LABEL maintainer="your-email@example.com" \
       description="Runtime image for Spring Boot Greeting Service"
@@ -25,7 +7,7 @@ ENV APP_HOME=/app
 # Set working directory for subsequent instructions
 WORKDIR $APP_HOME
 # Copy the built jar from the build stage into the runtime image
-COPY --from=build $APP_HOME/target/greeting-service-0.0.1-SNAPSHOT.jar app.jar
+COPY ./target/greeting-service-0.0.1-SNAPSHOT.jar app.jar
 
 # Demonstrate ADD by including an external file (example: README from a URL)
 ADD https://raw.githubusercontent.com/docker-library/docs/master/openjdk/README.md /app/README.md
