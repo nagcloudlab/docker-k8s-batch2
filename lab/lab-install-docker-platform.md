@@ -14,3 +14,16 @@ sudo usermod -aG docker ${USER}
 
 docker version
 ```
+
+
+
+```bash
+grep docker /etc/group
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+groups
+docker run hello-world
+```
+
+
