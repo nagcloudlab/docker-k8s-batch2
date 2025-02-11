@@ -77,26 +77,27 @@ dive nagabhushanamn/greeting-service:v1
 ```
 
 
-
-
-
-demo-1: build a spring-boot-app image
+Demo-1: build a spring-boot-app image
 
 ```bash
-cd greeting-service
+cd services/greeting-service
 docker build -t greeting-service:latest .
 docker image ls
 docker inspect greeting-service
 ```
 
-demo-2: build a angular app image
-    
+
+Demo-3: build a python-app image
+
 ```bash
-cd angular-app
-docker build -t angular-app:latest .
+cd cd services/python-web-service
+docker build -t python-app:latest .
 docker image ls
-docker run -d -p 80:80 --name angular-app angular-app:latest
+docker run -d -p 8080:8080 --name python-app python-app:latest
+curl http://localhost:8080
 ```
+
+
 
 build an image for multi-architecture:
 
