@@ -58,4 +58,3 @@ SHELL ["/bin/sh", "-c"]
 ENTRYPOINT ["java", "-jar", "app.jar"]
 # Provide default command-line arguments to the application
 CMD ["--spring.profiles.active=prod"]
-

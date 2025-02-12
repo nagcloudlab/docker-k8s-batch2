@@ -18,7 +18,9 @@ docker run -it ubuntu:20.04 /bin/sh
 ### Running a container in the background & naming a container
 
 ```bash
+docker rm my-ubuntu
 docker run --name my-ubuntu -d ubuntu:20.04 sleep 1000
+docker attach my-ubuntu
 ```
 
 ### Run additional command in a running container
@@ -72,6 +74,7 @@ docker container ls -a
 
 ```bash
 docker create --name my-ubuntu -it ubuntu:20.04
+docker container ls -a
 docker start my-ubuntu
 ```
 
