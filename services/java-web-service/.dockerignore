@@ -1,0 +1,26 @@
+
+# docker ignore file list for java web service
+
+# Ignore all files and directories that start with a dot
+
+.*
+
+# Ignore the target directory
+
+target
+
+# Ignore the build directory
+
+build
+
+# Ignore the .git directory
+
+.git
+
+# Ignore the .idea directory
+
+.idea
+
+# Ignore the .vscode directory
+
+.vscode

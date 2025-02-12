@@ -1,4 +1,4 @@
-install docker
+### install docker
 
 ```bash
 sudo apt update
@@ -8,22 +8,6 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 apt-cache policy docker-ce
 sudo apt install docker-ce
 sudo systemctl status docker
-
 sudo usermod -aG docker ${USER}
-
-
 docker version
 ```
-
-
-
-```bash
-grep docker /etc/group
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
-groups
-docker run hello-world
-```
-
-

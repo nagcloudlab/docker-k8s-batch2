@@ -1,22 +1,4 @@
-
-delete all containers:
-
-```bash
-docker ps -a
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-docker ps -a
-```
-
-delete all images:
-
-```bash
-docker image ls
-docker image rm -f $(docker image ls -q)
-docker image ls
-```
-
-pull & inspect images:
+### pull & inspect image:
 
 ```bash
 docker images
@@ -27,41 +9,35 @@ docker pull redis
 
 docker inspect redis
 docker history redis
-
-docker image ls
-
 ```
 
-pull an image using a specific tag:
+### pull an image using a specific tag:
 
 ```bash
 docker pull redis:6.0.9
 docker image ls
 ```
 
-pull an image using a specific digest:
+### pull an image using a specific digest:
 
 ```bash
 docker pull redis@sha256:48c1431bed43fb2645314e4a22d6ca03cf36c5541d034de6a4f3330e7174915b
 docker image ls
 ```
 
-
-pull un-official images:
+### pull un-official image:
 
 ```bash
 docker pull docker.io/nagabhushanamn/greeting-service:v1
 docker image ls
 ```
 
-
-tag an image:
+### tag an image:
 
 ```bash
 docker tag nagabhushanamn/greeting-service:v1 nagabhushanamn/greeting-service:tng
 docker image ls
 ```
-
 
 A tool for exploring each layer in a docker image:
 https://github.com/wagoodman/dive
@@ -76,36 +52,27 @@ sudo apt install ./dive_${DIVE_VERSION}_linux_amd64.deb
 dive nagabhushanamn/greeting-service:v1
 ```
 
-
-Demo-1: build a spring-boot-app image
+### demo-1: build a java-web-service image
 
 ```bash
-cd services/greeting-service
-docker build -t greeting-service:v2 .
+cd services/java-web-service
+docker build -t java-web-service:v2 .
 docker image ls
-docker run -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=stage  greeting-service:v2
+docker run -d -p 8080:8080 java-web-service:v2
+curl http://localhost:8080/api/info
 ```
 
-Demo-2: build a python-app image
+### demo-2: build a python-web-service image
 
 ```bash
 cd services/python-web-service
 docker build --build-arg FILE_NAME=app.py -t python-web-service:v1 .
 docker image ls
-docker run -d -p 8080:8080  python-web-service:latest
+docker run -d -p 8080:8080  python-web-service:v1
 curl http://localhost:8080/api/info
 ```
 
-
-```bash
-cd services/python-apps
-docker build -t python-apps:v3 .
-docker image ls
-docker run python-apps:v3 --help
-```
-
-
-build an image for multi-architecture:
+### build an image for multi-architecture:
 
 ```bash
 docker buildx build --platform linux/amd64,linux/arm64 -t greeting-service:v1 .
@@ -113,21 +80,14 @@ docker image ls
 docker inspect greeting-service:v1
 ```
 
-pull an imgae with a specific architecture:
+### pull an imgae with a specific architecture:
 
 ```bash
 docker pull --platform linux/arm64 redis
 docker image ls
 ```
 
-
-scan images for vulnerabilities:
-
-```bash
-docker scan greeting-service:latest
-```
-
-setup a private registry:
+### setup a private registry:
 
 ```bash
 docker run -d -p 5000:5000 --name registry registry:2
@@ -135,18 +95,32 @@ docker ps
 curl http://localhost:5000/v2/_catalog
 ```
 
-tag an image and push it to the private registry:
+### tag an image and push it to the private registry:
 
 ```bash
-docker tag greeting-service:v2 localhost:5000/greeting-service:v2
+docker tag java-web-service:v1 localhost:5000/java-web-service:v1
 docker image ls
-docker push localhost:5000/greeting-service:v2
+docker push localhost:5000/java-web-service:v1
 ```
 
-pull an image from the private registry:
+### pull an image from the private registry:
 
 ```bash
-docker pull localhost:5000/greeting-service:v2
+docker pull localhost:5000/java-web-service:v1
 docker image ls
 ```
 
+### Dockerfile Best Practices
+
+Some best practices for writing Dockerfiles include:
+
+- Use official base images.
+- Minimize the number of layers by combining commands.
+- Use multi-stage builds to reduce image size.
+- Leverage .dockerignore to exclude unnecessary files.
+- Specify exact versions of dependencies.
+- Use COPY instead of ADD.
+- Use ARG for dynamic values.
+- Use labels for metadata.
+- Use health checks to monitor container health.
+- Use .dockerignore to exclude unnecessary files.

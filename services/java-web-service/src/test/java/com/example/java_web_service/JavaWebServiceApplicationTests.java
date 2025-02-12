@@ -1,10 +1,10 @@
-package com.example.greeting_service;
+package com.example.java_web_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GreetingServiceApplicationTests {
+class JavaWebServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
