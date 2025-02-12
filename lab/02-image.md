@@ -56,9 +56,9 @@ dive nagabhushanamn/greeting-service:v1
 
 ```bash
 cd services/java-web-service
-docker build -t java-web-service:v2 .
+docker build -t java-web-service:v1 .
 docker image ls
-docker run -d -p 8080:8080 java-web-service:v2
+docker run -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=stage java-web-service:v1
 curl http://localhost:8080/api/info
 ```
 
@@ -75,7 +75,7 @@ curl http://localhost:8080/api/info
 ### build an image for multi-architecture:
 
 ```bash
-docker buildx build --platform linux/amd64,linux/arm64 -t greeting-service:v1 .
+docker buildx build --platform linux/amd64,linux/arm64 -t java-web-service:v1 .
 docker image ls
 docker inspect greeting-service:v1
 ```

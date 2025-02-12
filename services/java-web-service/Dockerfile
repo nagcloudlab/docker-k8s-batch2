@@ -25,8 +25,9 @@ FROM openjdk:17-jdk-alpine
 LABEL maintainer="your-email@example.com" \
       description="Runtime image for Spring Boot Greeting Service"
 # Set environment variable for the runtime container
-ENV APP_HOME=/app
-# Set working directory for subsequent instructions
+ENV APP_HOME=/app \
+    SPRING_PROFILES_ACTIVE=dev
+      # Set working directory for subsequent instructions
 WORKDIR $APP_HOME
 # Copy the built jar from the build stage into the runtime image
 COPY --from=build $APP_HOME/target/java-web-service-0.0.1-SNAPSHOT.jar app.jar
@@ -56,4 +57,5 @@ SHELL ["/bin/sh", "-c"]
 # Set the entrypoint so the container runs the Spring Boot application
 ENTRYPOINT ["java", "-jar", "app.jar"]
 # Provide default command-line arguments to the application
-# CMD ["--spring.profiles.active=prod"]
+CMD ["--spring.profiles.active=prod"]
+
