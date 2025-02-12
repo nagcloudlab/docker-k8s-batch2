@@ -1,3 +1,9 @@
+Create a container
+
+```bash
+docker run -dit -p 8080:8080 nagabhushanamn/req-count-service:v1
+```
+
 ## Creating and Managing Volumes
 
 ```bash

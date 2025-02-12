@@ -1,6 +1,4 @@
-### Docker Networking
-
-Network Drivers
+## Docker Network Drivers/Types
 
 1. None:
 
