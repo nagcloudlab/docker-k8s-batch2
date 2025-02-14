@@ -26,6 +26,8 @@ create k8s cluster
 kind create cluster --config kind-cluster.yaml --name kind-cluster
 
 
+verify cluster & it's resources
+------------------------------
 kubectl cluster-info
 kubectl get nodes -o wide
 kubectl config set-context --current --namespace=default
