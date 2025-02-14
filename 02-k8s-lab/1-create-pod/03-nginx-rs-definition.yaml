@@ -14,7 +14,8 @@ spec:
       - key: type
         operator: In
         values:
-          - front-end  
+          - front-end
+          - ui  
   template:
     metadata:
       name: nginx-pod

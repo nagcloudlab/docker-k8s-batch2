@@ -26,6 +26,7 @@ create k8s cluster
 kind create cluster --config kind-cluster.yaml --name kind-cluster
 
 
+
 verify cluster & it's resources
 ------------------------------
 kubectl cluster-info
@@ -38,5 +39,5 @@ kubectl get pods
 kubectl get services
 
 
-
-kind delete cluster --name kind-cluster
+kind get clusters
+kind delete cluster --name <cluster-name>

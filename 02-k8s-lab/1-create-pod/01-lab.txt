@@ -9,9 +9,6 @@ kubectl describe pod nginx
 kubectl delete pod nginx
 
 
-kubectl run nginx --image=nginx123 --dry-run=client -o yaml
-
-
 kubectl create -f 01-nginx-pod-definition.yaml
 kubectl get pods
 kubectl create -f 01-nginx-pod-definition.yaml
@@ -32,7 +29,6 @@ kubectl exec -it nginx-pod -- /bin/bash
 kubectl label pod nginx-pod environment=dev
 kubectl get pods --show-labels
 kubectl get pods -l environment=dev
-kubectl annotate pod nginx-pod description="Nginx web server pod"
 
 kubectl delete pod nginx-pod
 
