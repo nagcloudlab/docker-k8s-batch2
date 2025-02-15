@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-limits-pod
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+    command: ["sh", "-c", "echo 'Running with Resource Limits' && sleep 3600"]

@@ -1,0 +1,66 @@
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-anti-affinity-pod-1
+  labels:
+    app: myapp
+spec:
+  nodeName: my-cluster-worker
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]
+
+---
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-anti-affinity-pod-2
+  labels:
+    app: myapp
+spec:
+  nodeName: my-cluster-worker2
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]
+
+---
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-anti-affinity-pod-3
+  labels:
+    app: myapp
+spec:
+  nodeName: my-cluster-worker3
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]
+
+---
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-anti-affinity-pod
+spec:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app: myapp
+          topologyKey: "kubernetes.io/hostname"
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]

@@ -1,9 +1,0 @@
-
-
-controller : ReplicationController
----------------------------------
-
-
-kubectl apply -f 02-nginx-rc-definition.yaml
-kubectl get rc
-kubectl get pods

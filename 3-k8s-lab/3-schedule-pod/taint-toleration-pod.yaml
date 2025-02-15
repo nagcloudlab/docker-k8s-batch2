@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: taint-toleration-pod
+spec:
+  tolerations:
+  - key: "special"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sh", "-c", "echo 'Running with Toleration' && sleep 3600"]

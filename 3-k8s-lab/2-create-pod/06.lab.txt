@@ -1,4 +1,0 @@
-
-
-
-kubectl apply -f 07-postgres-statefull-definition.yaml

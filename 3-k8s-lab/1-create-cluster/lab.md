@@ -16,8 +16,23 @@ sudo mv ./kind /usr/local/bin/kind
 kind version
 ```
 
-### create a cluster
+### create k8s cluster
 
 ```bash
 kind create cluster --config kind-cluster.yaml --name my-cluster
 ```
+
+### verify the cluster
+
+```bash
+kubectl cluster-info --context kind-my-cluster
+kubectl get nodes -o wide
+```
+
+### delete the cluster
+
+```bash
+kind delete cluster --name my-cluster
+```
+
+

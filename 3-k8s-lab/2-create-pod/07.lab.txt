@@ -1,4 +1,0 @@
-
-
-
-kubectl apply -f 06-nginx-deamon-definition.yaml
