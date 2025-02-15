@@ -54,3 +54,16 @@ sudo ssh -i ~/.ssh/id_rsa azureuser@4.213.140.237
 ```bash
 cat /etc/os-release
 ```
+
+install zsh in ubuntu 24.04
+
+```bash
+sudo apt update
+sudo apt install zsh
+```
+
+install oh-my-zsh
+
+```bash
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
