@@ -33,6 +33,7 @@ open port 80 to allow web traffic to host
 
 ```bash
 az vm open-port --port 22 --resource-group myResourceGroup --name myVM --priority 1001
+az vm open-port --port 8080 --resource-group myResourceGroup --name myVM --priority 1002
 ```
 
 get the public IP address of the VM
@@ -45,7 +46,7 @@ ssh into the VM
 
 ```bash
 chmod 600 ~/.ssh/id_rsa
-sudo ssh -i ~/.ssh/id_rsa azureuser@74.225.232.187
+sudo ssh -i ~/.ssh/id_rsa azureuser@4.213.140.237
 ```
 
 ---
