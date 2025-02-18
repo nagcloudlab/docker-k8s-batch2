@@ -4,11 +4,10 @@ metadata:
   name: taint-toleration-pod
 spec:
   tolerations:
-  - key: "special"
+  - key: "ssd"
     operator: "Equal"
     value: "true"
     effect: "NoSchedule"
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running with Toleration' && sleep 3600"]
+  - name: nginx
+    image: nginx

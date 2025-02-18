@@ -4,8 +4,8 @@ metadata:
   name: resource-limits-pod
 spec:
   containers:
-  - name: busybox
-    image: busybox
+  - name: nginx
+    image: nginx
     resources:
       requests:
         cpu: "100m"
@@ -13,4 +13,3 @@ spec:
       limits:
         cpu: "500m"
         memory: "512Mi"
-    command: ["sh", "-c", "echo 'Running with Resource Limits' && sleep 3600"]

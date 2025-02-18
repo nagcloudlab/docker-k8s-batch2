@@ -1,6 +1,5 @@
 
 
-
 ### 1️⃣ Default Scheduling (Kube-Scheduler)
 
 ```bash
@@ -13,7 +12,7 @@ kubectl delete pod default-scheduled-pod
 ### 2️⃣ Node Selector
 
 ```bash
-kubectl get nodes --show-labels
+kubectl get nodes my-cluster-worker2 --show-labels
 kubectl label nodes my-cluster-worker2 disktype=ssd
 kubectl apply -f node-selector-pod.yaml
 kubectl get pods -o wide
@@ -40,6 +39,7 @@ kubectl delete -f node-affinity-pod.yaml
 
 
 ```bash
+kubectl get nodes --show-labels
 kubectl apply -f pod-affinity-pod.yaml
 kubectl get pods -o wide
 kubectl describe pod pod-affinity-pod
@@ -58,6 +58,10 @@ kubectl delete -f taint-toleration-pod.yaml
 ```
 
 
+
+
+
+
 ### 6️⃣ Resource Requests & Limits
 
 ```bash
@@ -66,6 +70,7 @@ kubectl get pods -o wide
 kubectl top pods
 kubectl describe pod resource-limits
 kubectl delete -f resource-limits.yaml
+
 ```
 
 

@@ -22,7 +22,7 @@ kubectl get pods
 kubectl delete pod nginx-pod
 ```
 
-### Lab: Create a Pod with a YAML file (kubectl apply -f)
+### Lab: Create a Pod with a YAML file (kubectl apply -f)( recommended)
 
 ```bash
 kubectl apply -f pod.yaml 
@@ -67,7 +67,7 @@ kubectl delete -f pod.yaml
 ### Create a Pod using ReplicationController
 
 ```bash
-kubectl create -f rc.yaml
+kubectl apply -f rc.yaml
 kubectl get pods
 kubectl get rc
 ```

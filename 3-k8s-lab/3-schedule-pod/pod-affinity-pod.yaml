@@ -9,9 +9,8 @@ metadata:
 spec:
   nodeName: my-cluster-worker
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]
+  - name: nginx
+    image: nginx
 
 ---
 
@@ -25,9 +24,8 @@ metadata:
 spec:
   nodeName: my-cluster-worker2
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]
+  - name: nginx
+    image: nginx
 
 ---
 
@@ -41,9 +39,8 @@ metadata:
 spec:
   nodeName: my-cluster-worker3
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]
+  - name: nginx
+    image: nginx
 
 ---
 
@@ -61,6 +58,5 @@ spec:
               app: myapp
           topologyKey: "kubernetes.io/hostname"
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running with Pod Anti-Affinity' && sleep 3600"]
+  - name: nginx
+    image: nginx

@@ -4,6 +4,5 @@ metadata:
   name: default-scheduled-pod
 spec:
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running Default Scheduler' && sleep 3600"]
+  - name: nginx
+    image: nginx

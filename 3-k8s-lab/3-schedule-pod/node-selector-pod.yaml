@@ -6,6 +6,5 @@ spec:
   nodeSelector:
     disktype: ssd  # Pod will only run on nodes labeled with "disktype=ssd"
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running on specific node' && sleep 3600"]
+  - name: nginx
+    image: nginx

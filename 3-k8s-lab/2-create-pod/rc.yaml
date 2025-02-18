@@ -8,7 +8,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-    app: nginx
+    app: nginx  
+    type : front-end 
   template:
     metadata:
       name: nginx-pod
@@ -19,3 +20,4 @@ spec:
       containers:
       - image: nginx
         name: nginx-container
+  

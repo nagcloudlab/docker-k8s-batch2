@@ -10,8 +10,7 @@ spec:
         - matchExpressions:
           - key: disktype
             operator: In
-            values: ["ssd"]
+            values: ["ssd","other"]
   containers:
-  - name: busybox
-    image: busybox
-    command: ["sh", "-c", "echo 'Running with Node Affinity' && sleep 3600"]
+  - name: nginx
+    image: nginx
