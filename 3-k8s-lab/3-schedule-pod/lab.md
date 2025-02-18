@@ -9,23 +9,32 @@ kubectl describe pod default-scheduled-pod
 kubectl delete pod default-scheduled-pod
 ```
 
+### 8️⃣ Schedule based on Node Name
+
+```bash
+kubectl apply -f manual-scheduled-pod.yaml
+kubectl get pods -o wide
+kubectl describe pod manual-scheduled-pod
+kubectl delete -f manual-scheduled-pod.yaml
+```
+
 ### 2️⃣ Node Selector
 
 ```bash
-kubectl get nodes my-cluster-worker2 --show-labels
-kubectl label nodes my-cluster-worker2 disktype=ssd
+kubectl get nodes --show-labels
+kubectl label nodes my-cluster-worker2 disktype=ssd # add label to node
 kubectl apply -f node-selector-pod.yaml
 kubectl get pods -o wide
 kubectl describe pod node-selector-pod
 kubectl delete -f node-selector-pod.yaml
-kubectl label nodes my-cluster-worker2 disktype-
+kubectl label nodes my-cluster-worker2 disktype- # remove label from node
 ```
 
 
 ### 3️⃣ Node Affinity
 
 ```bash
-kubectl get nodes --show-labels
+kubectl get nodes my-cluster-worker2  --show-labels
 kubectl get nodes -l disktype
 kubectl get nodes -L disktype
 kubectl label nodes my-cluster-worker2 disktype=ssd
@@ -50,17 +59,12 @@ kubectl delete -f pod-affinity-pod.yaml
 
 ```bash
 kubectl describe node my-cluster-worker2
-kubectl taint nodes my-cluster-worker2 ssd=true:NoSchedule
+kubectl taint nodes my-cluster-worker2 kafka=true:NoSchedule
 kubectl apply -f taint-toleration-pod.yaml
 kubectl get pods -o wide
 kubectl describe pod taint-toleration-pod
 kubectl delete -f taint-toleration-pod.yaml
 ```
-
-
-
-
-
 
 ### 6️⃣ Resource Requests & Limits
 
@@ -85,14 +89,6 @@ kubectl delete -f priority-pod.yaml
 kubectl delete -f priority-class.yaml
 ```
 
-### 8️⃣ Manual Scheduling (Node Name)
-
-```bash
-kubectl apply -f manual-scheduled-pod.yaml
-kubectl get pods -o wide
-kubectl describe pod manual-scheduled-pod
-kubectl delete -f manual-scheduled-pod.yaml
-```
 
 ### remove all the labels and taints
 

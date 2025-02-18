@@ -4,7 +4,7 @@ metadata:
   name: taint-toleration-pod
 spec:
   tolerations:
-  - key: "ssd"
+  - key: "kafka"
     operator: "Equal"
     value: "true"
     effect: "NoSchedule"

@@ -93,9 +93,9 @@ kubectl get pods
 
 ### Create a Pod using ReplicaSet
 ```bash
-kubectl create -f rs.yaml
-kubectl get pods
+kubectl apply -f rs.yaml
 kubectl get rs
+kubectl get pods
 ```
 
 ### Scale a ReplicaSet
@@ -163,7 +163,7 @@ kubectl get pods
 
 ### Scale up a StatefulSet
 ```bash
-kubectl scale --replicas=4 sts nginx-sts
+kubectl scale --replicas=3 sts nginx-sts
 kubectl get pods
 ```
 
@@ -189,7 +189,7 @@ kubectl get pods -o wide
 
 ### Delete a DaemonSet
 ```bash
-kubectl delete ds nginx-ds
+kubectl delete -f ds.yaml
 kubectl get pods
 ```
 

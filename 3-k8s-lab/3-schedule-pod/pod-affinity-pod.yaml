@@ -5,7 +5,7 @@ kind: Pod
 metadata:
   name: pod-anti-affinity-pod-1
   labels:
-    app: myapp
+    app: nginx
 spec:
   nodeName: my-cluster-worker
   containers:
@@ -20,7 +20,7 @@ kind: Pod
 metadata:
   name: pod-anti-affinity-pod-2
   labels:
-    app: myapp
+    app: nginx
 spec:
   nodeName: my-cluster-worker2
   containers:
@@ -35,7 +35,7 @@ kind: Pod
 metadata:
   name: pod-anti-affinity-pod-3
   labels:
-    app: myapp
+    app: nginx
 spec:
   nodeName: my-cluster-worker3
   containers:
@@ -55,7 +55,7 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
         - labelSelector:
             matchLabels:
-              app: myapp
+              app: nginx
           topologyKey: "kubernetes.io/hostname"
   containers:
   - name: nginx

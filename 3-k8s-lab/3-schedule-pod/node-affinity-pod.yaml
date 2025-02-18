@@ -10,7 +10,7 @@ spec:
         - matchExpressions:
           - key: disktype
             operator: In
-            values: ["ssd","other"]
+            values: ["ssd"]
   containers:
   - name: nginx
     image: nginx
