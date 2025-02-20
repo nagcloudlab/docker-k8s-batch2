@@ -6,6 +6,6 @@ image:
 env:
   SPRING_PROFILES_ACTIVE: "docker"
 
-livenessProbe_enabled: true
+livenessProbe_enabled: false
 
-readinessProbe_enabled: true
+readinessProbe_enabled: false

@@ -12,7 +12,7 @@ env:
 ports:
   - containerPort: 9411
 
-livenessProbe_enabled: true
+livenessProbe_enabled: false
 livenessProbe:
   httpGet:
     scheme: HTTP
@@ -24,7 +24,7 @@ livenessProbe:
   failureThreshold: 20
   successThreshold: 1
 
-readinessProbe_enabled: true
+readinessProbe_enabled: false
 readinessProbe:
   httpGet:
     scheme: HTTP

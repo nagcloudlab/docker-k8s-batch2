@@ -6,10 +6,10 @@
 
 ```bash
 kubectl apply -f volume-emptydir.yaml
-kubectl exec -it emptydir-demo -c reader -- sh
+kubectl exec -it pod1 -c reader -- sh
 cat /data/file.txt
 
-kubectl delete pod emptydir-demo
+kubectl delete pod pod1
 
 ```
 
