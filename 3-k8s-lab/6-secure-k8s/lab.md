@@ -13,7 +13,7 @@ docker cp my-cluster-control-plane:/etc/kubernetes/pki/ca.key .
 
 ```bash
 openssl genrsa -out user1.key 2048
-openssl req -new -key user1.key -out user1.csr -subj "/CN=user1/O=dev-team"
+openssl req -new -key user1.key -out user1.csr -subj "/CN=user1/O=npci-team"
 openssl x509 -req -in user1.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out user1.crt -days 365
 ```
 
@@ -58,5 +58,30 @@ kubectl apply -f developer-role-binding.yaml
 ```
 
 
+### create 'cluster-role'
+
+```bash
+kubectl apply -f cluster-read-role.yaml
+kubectl get clusterroles
+kubectl apply -f cluster-read-role-binding.yaml
+
+
+
+### create service-account 'app-service-account'
+
+```bash
+kubectl create serviceaccount app-service-account
+kubectl get serviceaccounts
+
+kubectl apply -f serviceaccount-pod.yaml
+kubectl exec -it sa-pod -- apk --update add cur
+kubectl exec -it sa-pod -- sh
+TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+curl -s --header "Authorization: Bearer $TOKEN" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes.default.svc/api/v1/namespaces/default/pods
+
+kubectl apply -f serviceaccount-role.yaml
+kubectl apply -f serviceaccount-rolebinding.yaml
+
+```
 
 
