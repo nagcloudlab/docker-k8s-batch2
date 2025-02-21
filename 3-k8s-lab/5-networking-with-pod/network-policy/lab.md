@@ -5,6 +5,7 @@
 
 ```bash
 kubectl apply -f nginx.yaml
+kubectl delete -f nginx.yaml
 ```
 
 ```bash
