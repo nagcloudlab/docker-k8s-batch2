@@ -1,0 +1,43 @@
+replicaCount: 1
+
+global:
+  appName: example-voting-app
+
+apps:
+  db:
+   image: postgres:15
+   port: 5432
+   replicas: 1
+   secretName: postgres-secret
+   storage: "1Gi"
+   storageClass: managed-csi  # Ensure AKS storage class
+
+  redis:
+    image: redis:alpine
+    port: 6379
+    replicas: 1
+
+  vote:
+    image: docker/example-voting-app-vote
+    port: 80
+    replicas: 1
+
+  worker:
+    image: docker/example-voting-app-worker
+    replicas: 1
+
+  result:
+    image: docker/example-voting-app-result
+    port: 80
+    replicas: 1
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+  limits:
+    memory: "256Mi"
+    cpu: "500m"
+
+ingress:
+  enabled: false

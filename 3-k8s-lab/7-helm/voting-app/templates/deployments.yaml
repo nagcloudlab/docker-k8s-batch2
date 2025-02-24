@@ -1,0 +1,70 @@
+{{- range $name, $config := .Values.apps }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+  labels:
+    app: {{ $name }}
+spec:
+  replicas: {{ $config.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ $name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $name }}
+    spec:
+      securityContext:
+        fsGroup: 999  # Ensures PostgreSQL has proper volume access
+      containers:
+        - name: {{ $name }}
+          image: {{ $config.image }}
+          ports:
+            - containerPort: {{ $config.port | default 80 }}
+          {{- if eq $name "db" }}
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.apps.db.secretName }}
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: trust
+          securityContext:
+            runAsUser: 999    # Run as postgres user directly
+            runAsGroup: 999
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              set -e
+              echo "🔧 Starting PostgreSQL as user $(id -u) ..."
+              if [ ! -f "/var/lib/postgresql/data/db-files/PG_VERSION" ]; then
+                echo "📀 Initializing PostgreSQL database..."
+                mkdir -p /var/lib/postgresql/data/db-files
+                chown -R 999:999 /var/lib/postgresql/data/db-files
+                initdb -D /var/lib/postgresql/data/db-files
+                echo "host all all 0.0.0.0/0 trust" >> /var/lib/postgresql/data/db-files/pg_hba.conf
+              else
+                echo "✅ Database already initialized, skipping."
+              fi
+              exec postgres -D /var/lib/postgresql/data/db-files
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/postgresql/data
+          {{- end }}
+          resources:
+            requests:
+              memory: {{ $.Values.resources.requests.memory }}
+              cpu: {{ $.Values.resources.requests.cpu }}
+            limits:
+              memory: {{ $.Values.resources.limits.memory }}
+              cpu: {{ $.Values.resources.limits.cpu }}
+      {{- if eq $name "db" }}
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: db-data-pvc
+      {{- end }}
+---
+{{- end }}

@@ -1,0 +1,13 @@
+{{- range $name, $config := .Values.apps }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+spec:
+  selector:
+    app: {{ $name }}
+  ports:
+    - port: {{ $config.port | default 80 }}
+      targetPort: {{ $config.port | default 80 }}
+---
+{{- end }}

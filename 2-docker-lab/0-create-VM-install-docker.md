@@ -45,7 +45,7 @@ ssh into the VM
 
 ```bash
 chmod 600 ~/.ssh/id_rsa
-sudo ssh -i ~/.ssh/id_rsa azureuser@74.225.195.59
+sudo ssh -i ~/.ssh/id_rsa azureuser@20.204.182.165
 ```
 
 ---

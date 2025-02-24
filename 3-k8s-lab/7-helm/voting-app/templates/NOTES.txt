@@ -1,0 +1,16 @@
+{{- if .Values.ingress.enabled }}
+The application is accessible via the Ingress:
+
+Vote App: http://{{ .Values.ingress.hosts.vote }}
+Result App: http://{{ .Values.ingress.hosts.result }}
+{{- else }}
+Ingress is disabled. Use port-forwarding to access the application:
+
+kubectl port-forward svc/vote 8080:80
+kubectl port-forward svc/result 8081:80
+
+Then open:
+
+- Vote App: http://localhost:8080
+- Result App: http://localhost:8081
+{{- end }}
